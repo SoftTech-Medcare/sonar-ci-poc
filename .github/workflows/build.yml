@@ -31,14 +31,14 @@ jobs:
         uses: actions/cache@v1
         with:
           path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner-v2
-          restore-keys: ${{ runner.os }}-sonar-scanner-v2
+          key: ${{ runner.os }}-sonar-scanner-v3
+          restore-keys: ${{ runner.os }}-sonar-scanner-v3
       - name: Install SonarQube scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner --version 5.13
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       - name: Build and analyze
         shell: powershell
         run: |
